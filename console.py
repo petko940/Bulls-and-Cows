@@ -16,9 +16,12 @@ class Game:
     def play(self):
         random_number = self.generate_random_number()
         while not self.game_over:
-            current_number = input("Enter a four-digit number (digits must be different): ")
+            current_number = input("Enter a four-digit number (digits must be different) or 'cancel' to exit: ")
             while True:
                 try:
+                    if current_number == 'cancel':
+                        break
+
                     current_number = int(current_number)
                     if 999 <= current_number <= 9999 and len(set(str(current_number))) == 4:
                         break
@@ -31,8 +34,17 @@ class Game:
 
             if current_number == random_number:
                 self.game_over = True
-                print(f"You won in {self.moves} moves!")
-                break
+                print(f"You won in {self.moves} moves! the number was {random_number}!")
+                if self.play_again():
+                    self.__init__()
+                    self.play()
+
+            elif current_number == 'cancel':
+                print(f"You lost! The number was {random_number}!")
+                self.game_over = True
+                if self.play_again():
+                    self.__init__()
+                    self.play()
 
             bulls, cows = 0, 0
             for index, num in enumerate(str(current_number)):
@@ -42,6 +54,18 @@ class Game:
                     cows += 1
 
             print(f"Bulls: {bulls}, Cows: {cows}")
+
+    @staticmethod
+    def play_again():
+        while True:
+            try:
+                result = input("Play again? (y/n): ")
+                if result == 'y':
+                    return True
+                elif result == 'n':
+                    exit()
+            except:
+                exit()
 
 
 game = Game()
