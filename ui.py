@@ -94,7 +94,6 @@ class Game:
         if current_number == '????':
             return None, None
 
-        print(self.random_number)
         current_number = int(current_number)
 
         bulls, cows = 0, 0
@@ -131,12 +130,24 @@ class Game:
 
             y = 245
             for x in range(len(self.data)):
-                num = tk.Label(self.root, text=x + 1, font=('Arial', 12))
+                num = tk.Label(
+                    self.root,
+                    text=x + 1,
+                    font=('Arial', 12)
+                )
                 num.place(x=67, y=y)
-                guess = tk.Label(self.root, text=f"{self.data[x][0]}", font=('Arial', 12))
+
+                guess = tk.Label(
+                    self.root,
+                    text=f"{self.data[x][0]}",
+                    font=('Arial', 12)
+                )
                 guess.place(x=170, y=y)
-                result = tk.Label(self.root, text=f"{self.data[x][1]} Bulls, {self.data[x][2]} Cows",
-                                  font=('Arial', 12))
+                result = tk.Label(
+                    self.root,
+                    text=f"{self.data[x][1]} Bulls | {self.data[x][2]} Cows",
+                    font=('Arial', 12)
+                )
                 result.place(x=310, y=y)
                 y += 30
 
