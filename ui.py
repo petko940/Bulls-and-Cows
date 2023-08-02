@@ -22,7 +22,7 @@ class Game:
             root,
             text="delete",
             command=self.on_delete_button_click,
-            font=('Arial', 16),
+            font=('Arial', 17),
             width=5,
         )
         self.button_enter = tk.Button(
@@ -33,6 +33,13 @@ class Game:
             width=3,
             state='disabled',
             background='gray'
+        )
+        self.button_surrender = tk.Button(
+            root,
+            text="lose",
+            command=self.end_game,
+            font=('Arial', 17),
+            width=5,
         )
         self.bulls = None
         self.cows = None
@@ -170,7 +177,8 @@ class Game:
             button.place(x=80 + i * 60, y=140)
 
         self.button_enter.place(x=80 + 240, y=140)
-        self.button_delete.place(x=390, y=120)
+        self.button_delete.place(x=390, y=80)
+        self.button_surrender.place(x=390, y=140)
         self.root.mainloop()
 
     def end_game(self):
@@ -178,7 +186,7 @@ class Game:
         self.root.destroy()
         root1 = tk.Tk()
         root1.title("End")
-        root1.geometry("300x300")
+        root1.geometry("300x300+600+100")
         root1.resizable(False, False)
 
         def play_again():
@@ -186,7 +194,7 @@ class Game:
             root = tk.Tk()
             root.title("Bulls and Cows")
 
-            root.geometry("500x700")
+            root.geometry("500x600+600+100")
             root.resizable(False, False)
 
             new_game = Game(root)
@@ -251,7 +259,7 @@ def start_game():
 root = tk.Tk()
 root.title("Bulls and Cows")
 
-root.geometry("500x600")
+root.geometry("500x600+600+100")
 root.resizable(False, False)
 
 game = Game(root)
