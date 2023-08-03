@@ -1,7 +1,7 @@
 from random import shuffle
 
 
-class Game:
+class ConsoleGame:
     def __init__(self):
         self.game_over = False
         self.moves = 0
@@ -42,9 +42,7 @@ class Game:
             elif current_number == 'cancel':
                 print(f"You lost! The number was {random_number}!")
                 self.game_over = True
-                if self.play_again():
-                    self.__init__()
-                    self.play()
+                break
 
             bulls, cows = 0, 0
             for index, num in enumerate(str(current_number)):
@@ -63,10 +61,11 @@ class Game:
                 if result == 'y':
                     return True
                 elif result == 'n':
-                    exit()
+                    return False
             except:
-                exit()
+                return False
 
 
-game = Game()
-game.play()
+if __name__ == '__main__':
+    game = ConsoleGame()
+    game.play()
