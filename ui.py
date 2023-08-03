@@ -48,6 +48,10 @@ class Game:
         self.game_ended = False
         self.moves = 0
 
+        # timer
+        self.elapsed_time = 0
+        self.timer_label = None
+
     def create_buttons(self):
         self.buttons_numbers_first_row = {}
         for i in range(1, 6):
@@ -179,6 +183,12 @@ class Game:
         self.button_enter.place(x=80 + 240, y=140)
         self.button_delete.place(x=390, y=80)
         self.button_surrender.place(x=390, y=140)
+
+        # timer
+        self.timer_label = tk.Label(self.root, text='', font=('Arial', 16))
+        self.timer_label.place(x=430, y=540)
+        self.update_timer()
+
         self.root.mainloop()
 
     def end_game(self):
@@ -208,7 +218,8 @@ class Game:
         if self.is_winning:
             win_message = tk.Label(
                 root1,
-                text=f"You won in {self.moves} moves",
+                text=f"You won in {self.moves} moves"
+                     f"\n for {self.elapsed_time} seconds",
                 font=('Arial', 16),
                 width=30,
             )
@@ -250,6 +261,11 @@ class Game:
 
         root1.mainloop()
 
+    def update_timer(self):
+        self.elapsed_time += 1
+        self.timer_label.config(text=f"{self.elapsed_time}s")
+        if not self.game_ended:
+            self.root.after(1000, self.update_timer)
 
 def start_game():
     start_button.pack_forget()
