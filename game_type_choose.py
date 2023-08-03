@@ -3,7 +3,7 @@ from console import ConsoleGame
 if __name__ == '__main__':
     while True:
         print("""------------------------------
-    Press Number
+    Enter number
     1 - Console game
     2 - GUI Game
     3 - Exit
